@@ -6,14 +6,14 @@
       "name": "sendTweet",
       "accounts": [
         {
-          "name": "tweet",
+          "name": "author",
           "isMut": true,
           "isSigner": true
         },
         {
-          "name": "author",
+          "name": "tweet",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "systemProgram",
@@ -22,6 +22,15 @@
         }
       ],
       "args": [
+        {
+          "name": "uuid",
+          "type": {
+            "array": [
+              "u8",
+              16
+            ]
+          }
+        },
         {
           "name": "topic",
           "type": "string"
@@ -40,6 +49,15 @@
         "kind": "struct",
         "fields": [
           {
+            "name": "uuid",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
             "name": "author",
             "type": "publicKey"
           },
@@ -54,6 +72,10 @@
           {
             "name": "content",
             "type": "string"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }

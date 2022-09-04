@@ -10,14 +10,14 @@ export const fetchTweets = async (filters = []) => {
 
 export const authorFilter = authorBase58PublicKey => ({
     memcmp: {
-        offset: 8,
+        offset: 8 + 16,
         bytes: authorBase58PublicKey,
     }
 })
 
 export const topicFilter = topic => ({
     memcmp: {
-        offset: 8 + 32 + 8 + 4,
+        offset: 8 + 16 + 32 + 8 + 4,
         bytes: bs58.encode(Buffer.from(topic))
     }
 })
