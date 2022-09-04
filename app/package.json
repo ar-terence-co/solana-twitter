@@ -9,9 +9,6 @@
     "build": "vue-cli-service build",
     "build:devnet": "vue-cli-service build --mode devnet",
     "build:mainnet": "vue-cli-service build --mode mainnet",
-    "clean-build": "rm -rf node_modules dist; yarn install; yarn build",
-    "clean-build:devnet": "rm -rf node_modules dist; yarn install; yarn build:devnet",
-    "clean-build:mainnet": "rm -rf node_modules dist; yarn install; yarn build:mainnet",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
