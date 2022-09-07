@@ -13,6 +13,11 @@ const orderedTweets = computed(() => {
     return tweets.value.slice().sort((a, b) => b.timestamp - a.timestamp)
 })
 
+const replaceTweet = (tweet, otherTweet) => {
+    const index = tweets.value.indexOf(tweet)
+    tweets.value[index] = otherTweet;
+}
+
 const removeTweet = tweet => {
     const index = tweets.value.indexOf(tweet)
     return tweets.value.splice(index, 1)
@@ -24,6 +29,6 @@ const removeTweet = tweet => {
         Loading...
     </div>
     <div v-else class="divide-y">
-        <tweet-card v-for="tweet in orderedTweets" @deleted="removeTweet" :key="tweet.key" :tweet="tweet"></tweet-card>
+        <tweet-card v-for="tweet in orderedTweets" @updated="replaceTweet" @deleted="removeTweet" :key="tweet.key" :tweet="tweet"></tweet-card>
     </div>
 </template>

@@ -2,8 +2,9 @@
 import { toRefs, computed, ref } from 'vue'
 import { useWorkspace } from '@/composables'
 import { deleteTweet } from '@/api';
+import TweetFormUpdate from './TweetFormUpdate'
 
-const emit = defineEmits(['deleted'])
+const emit = defineEmits(['updated', 'deleted'])
 const props = defineProps({
     tweet: Object,
 })
@@ -21,16 +22,21 @@ const authorRoute = computed(() => {
 
 const isEditing = ref(false)
 
+const onUpdate = async (updatedTweet) => {
+    emit("updated", tweet.value, updatedTweet)
+    isEditing.value = false
+}
+
 const onDelete = async () => {
     await deleteTweet(tweet.value.key)
     emit("deleted", tweet.value)
 }
 
-
 </script>
 
 <template>
-    <div class="px-8 py-4">
+    <tweet-form-update v-if="isEditing" :tweet="tweet" @updated="onUpdate"></tweet-form-update>
+    <div class="px-8 py-4" v-else>
         <div class="flex justify-between">
             <div class="py-1">
                 <h3 class="inline font-semibold" :title="tweet.author">
