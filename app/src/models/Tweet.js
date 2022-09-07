@@ -4,7 +4,8 @@ export class Tweet {
     constructor (publicKey, accountData) {
         this.publicKey = publicKey
         this.author = accountData.author
-        this.timestamp = accountData.timestamp.toString()
+        this.createdTimestamp = accountData.createdTimestamp.toString()
+        this.updatedTimestamp = accountData.updatedTimestamp.toString()
         this.topic = accountData.topic
         this.content = accountData.content
     }
@@ -13,16 +14,16 @@ export class Tweet {
         return this.publicKey.toBase58()
     }
 
-    get author_display () {
+    get authorDisplay () {
         const author = this.author.toBase58()
         return author.slice(0, 4) + '..' + author.slice(-4)
     }
 
-    get created_at () {
-        return dayjs.unix(this.timestamp).format('lll')
+    get createdAt () {
+        return dayjs.unix(this.createdTimestamp).format('lll')
     }
 
-    get created_ago () {
-        return dayjs.unix(this.timestamp).fromNow()
+    get createdAgo () {
+        return dayjs.unix(this.createdTimestamp).fromNow()
     }
 }

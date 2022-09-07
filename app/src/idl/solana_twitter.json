@@ -23,14 +23,39 @@
       ],
       "args": [
         {
-          "name": "uuid",
+          "name": "topic",
+          "type": "string"
+        },
+        {
+          "name": "content",
+          "type": "string"
+        },
+        {
+          "name": "uniqueSeed",
           "type": {
             "array": [
               "u8",
               16
             ]
           }
+        }
+      ]
+    },
+    {
+      "name": "updateTweet",
+      "accounts": [
+        {
+          "name": "author",
+          "isMut": true,
+          "isSigner": true
         },
+        {
+          "name": "tweet",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
         {
           "name": "topic",
           "type": "string"
@@ -40,6 +65,22 @@
           "type": "string"
         }
       ]
+    },
+    {
+      "name": "deleteTweet",
+      "accounts": [
+        {
+          "name": "author",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tweet",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -49,20 +90,15 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "uuid",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
-          },
-          {
             "name": "author",
             "type": "publicKey"
           },
           {
-            "name": "timestamp",
+            "name": "createdTimestamp",
+            "type": "i64"
+          },
+          {
+            "name": "updatedTimestamp",
             "type": "i64"
           },
           {
@@ -72,6 +108,15 @@
           {
             "name": "content",
             "type": "string"
+          },
+          {
+            "name": "uniqueSeed",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
           },
           {
             "name": "bump",

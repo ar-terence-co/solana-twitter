@@ -8,13 +8,13 @@ import { confirmTx } from "./confirm-tx"
 export const sendTweet = async (topic, content) => {
     const { wallet, program } = useWorkspace()
     
-    const uuid = new BN(uuidParse(uuidV4()))
+    const uniqueSeed = new BN(uuidParse(uuidV4()))
     const [tweetPDA,] = await web3.PublicKey.findProgramAddress(
-      [Buffer.from("tweet"), wallet.value.publicKey.toBuffer(), uuid.toArrayLike(Buffer)], 
+      [Buffer.from("tweet"), wallet.value.publicKey.toBuffer(), uniqueSeed.toArrayLike(Buffer)], 
       program.value.programId,
     )
 
-    const txSignature = await program.value.methods.sendTweet(uuid.toArray(), topic, content)
+    const txSignature = await program.value.methods.sendTweet(topic, content, uniqueSeed.toArray())
         .accounts({
             tweet: tweetPDA,
             author: wallet.value.publicKey,
